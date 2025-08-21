@@ -1,5 +1,7 @@
-class Solution {
-
+    
+    
+    class Solution{
+    
     public int numSubmat(int[][] mat) {
         int n = mat[0].length;
         int[] heights = new int[n];
@@ -25,6 +27,6 @@ class Solution {
         }
         return res;
     }
-}
+    }
     
     
