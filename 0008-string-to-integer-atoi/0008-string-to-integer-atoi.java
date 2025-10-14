@@ -1,31 +1,45 @@
 class Solution {
-    public int myAtoi(String s) {
-        int i = 0, n = s.length(), sign = 1, result = 0;
+    public int myAtoi(String str) {
+       
+       if(str==null && str.isEmpty()) return  0;
 
-        // Step 1: Skip leading whitespaces
-        while (i < n && s.charAt(i) == ' ') {
-            i++;
+        str=str.trim();
+        
+        if(str.isEmpty()){
+            return 0;
         }
 
-        // Step 2: Check for sign
-        if (i < n && (s.charAt(i) == '+' || s.charAt(i) == '-')) {
-            sign = (s.charAt(i) == '-') ? -1 : 1;
-            i++;
+        int index=0;
+        int sign =1;
+        int n= str.length();
+        long num =0;
+
+       
+
+
+        if(str.charAt(index)=='-' || str.charAt(index)=='+'){
+
+            sign = (str.charAt(index)=='-') ? -1 : 1;
+            index++;
         }
 
-        // Step 3: Convert digits and check for overflow
-        while (i < n && Character.isDigit(s.charAt(i))) {
-            int digit = s.charAt(i) - '0';
+        
+         while(index < n &&  Character.isDigit(str.charAt(index))){
 
-            // Check overflow
-            if (result > (Integer.MAX_VALUE - digit) / 10) {
-                return (sign == 1) ? Integer.MAX_VALUE : Integer.MIN_VALUE;
-            }
+             num = num*10+(str.charAt(index)-'0');
 
-            result = result * 10 + digit;
-            i++;
-        }
+             if(num * sign> Integer.MAX_VALUE){
+                 return  Integer.MAX_VALUE;
+             }
 
-        return result * sign;
+             if(num * sign < Integer.MIN_VALUE){
+                 return  Integer.MIN_VALUE;
+             }
+
+             index++;
+         }
+
+         return  (int)(sign * num);
+        
     }
 }
